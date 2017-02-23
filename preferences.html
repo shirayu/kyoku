@@ -34,6 +34,12 @@ footer{
       Set this to limit the number of characters of the current song title displayed. Set to no value for no limit.
     </div>
   </div>
+  <div class="segment">
+    <label>Target application:</label> <select id="targetApplication">
+        <option value="iTunes">iTunes</option>
+        <option value="VLC">VLC</option>
+    </select>
+  </div>
 </form>
 <footer>
   <a href="https://github.com/cheeaun/kyoku" rel="external">Kyoku</a> <span id="version"></span>, built by <a href="http://twitter.com/cheeaun" rel="external">@cheeaun</a>.
@@ -62,4 +68,22 @@ var updateCharsLimit = function(){
 };
 $charsLimit.addEventListener('keyup', updateCharsLimit);
 $charsLimit.addEventListener('change', updateCharsLimit);
+
+
+$targetApplication = document.getElementById('targetApplication');
+$targetApplicationOptions = $targetApplication.options;
+for(var i = 0; i < $targetApplicationOptions.length; i++){
+  if($targetApplicationOptions[i].text === store.get('targetApplication')){
+    $targetApplicationOptions[i].selected = true;
+    break;
+  };
+};
+
+function updateTargetApplication(){
+  var idx = $targetApplication.selectedIndex;
+  store.set('targetApplication', $targetApplicationOptions[idx].value);
+}
+$targetApplication.addEventListener('keyup', updateTargetApplication, false);
+$targetApplication.addEventListener('change', updateTargetApplication, false);
+
 </script>

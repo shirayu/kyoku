@@ -1,11 +1,12 @@
 {
   "name": "kyoku",
   "version": "0.0.6",
-  "description": "A tiny app that shows iTunes current playing song on Mac menu bar",
+  "description": "A tiny app that shows iTunes/VLC current playing song on Mac menu bar",
   "main": "app.js",
   "keywords": [
     "electron-app",
     "itunes",
+    "vlc",
     "mac",
     "menu",
     "menubar",

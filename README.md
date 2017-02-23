@@ -3,7 +3,7 @@ Kyoku
 
 ![Screenshot](http://i.imgur.com/nhRHJw6.png)
 
-A tiny app that shows iTunes current playing song on Mac menu bar.
+A tiny app that shows iTunes/VLC current playing song on Mac menu bar.
 
 To download the latest version, visit the [releases page](https://github.com/cheeaun/kyoku/releases).
 

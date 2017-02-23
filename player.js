@@ -2,13 +2,15 @@ var exec = require('child_process').exec;
 var events = require('events');
 var util = require('util');
 
-var Player = function(){
+var Player = function(targetApplication){
   var self = this;
+  self.targetApplication = 'iTunes';
   events.EventEmitter.call(this);
 
   self.track = {};
 
-  var cmd = 'osascript -l JavaScript -e \''
+  var cmds = {}
+  cmds['iTunes'] = 'osascript -l JavaScript -e \''
     + 'var itunes = Application("iTunes");'
     + 'var currentTrack = itunes.currentTrack();'
     + 'JSON.stringify({'
@@ -18,8 +20,17 @@ var Player = function(){
       + 'playing: itunes.playerState() == "playing"'
     + '})\'';
 
+  cmds['VLC'] = 'osascript -l JavaScript -e \''
+    + 'var app = Application("VLC");'
+    + 'JSON.stringify({'
+      + 'name: app.nameOfCurrentItem(),'
+      + 'artist: "",'
+      + 'album: "",'
+      + 'playing: app.playing()'
+    + '})\'';
+
   var fetchData = function(){
-    exec(cmd, function(e, stdout, stderr){
+    exec(cmds[self.targetApplication], function(e, stdout, stderr){
       var data = {};
       try { data = JSON.parse(stdout); } catch (e) {}
       if (!data.playing){

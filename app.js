@@ -9,6 +9,7 @@ const TinyStore = require(__dirname + '/tinystore');
 const store = global.store = new TinyStore(userHome + '/.kyoku');
 
 const player = require(__dirname + '/player');
+player.targetApplication = store.get('targetApplication') || 'iTunes';
 
 // Don't quit app when closing any spawned windows
 app.on('window-all-closed', function(e){
@@ -91,7 +92,9 @@ player.on('paused', function(data){
 store.on('change', function(key, value){
   if (key == 'charsLimit' && currentState == 'playing'){
     appTray.setTitle('▶ ' + truncateName(currentName, value) + '  ');
-  }
+  } else if (key == 'targetApplication'){
+    player.targetApplication = value;
+  };
 });
 
 app.dock.hide();
