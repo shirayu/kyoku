@@ -2,7 +2,7 @@ var exec = require('child_process').exec;
 var events = require('events');
 var util = require('util');
 
-var Itunes = function(){
+var Player = function(){
   var self = this;
   events.EventEmitter.call(this);
 
@@ -45,6 +45,6 @@ var Itunes = function(){
   setInterval(fetchData, 1000);
 }
 
-util.inherits(Itunes, events.EventEmitter);
+util.inherits(Player, events.EventEmitter);
 
-module.exports = new Itunes();
+module.exports = new Player();

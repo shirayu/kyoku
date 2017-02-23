@@ -8,7 +8,7 @@ const userHome = require('user-home');
 const TinyStore = require(__dirname + '/tinystore');
 const store = global.store = new TinyStore(userHome + '/.kyoku');
 
-const itunes = require(__dirname + '/itunes');
+const player = require(__dirname + '/player');
 
 // Don't quit app when closing any spawned windows
 app.on('window-all-closed', function(e){
@@ -59,7 +59,7 @@ function truncateName(name, charsLimit){
 
 var currentName = '', currentState = 'paused';
 
-itunes.on('playing', function(data){
+player.on('playing', function(data){
   currentState = 'playing';
   currentName = data.name;
   appTray.setTitle('▶ ' + truncateName(currentName) + '  ');
@@ -77,7 +77,7 @@ itunes.on('playing', function(data){
   appTray.setContextMenu(contextMenu);
 });
 
-itunes.on('paused', function(data){
+player.on('paused', function(data){
   currentState = 'paused';
 
   menuTemplate[0].visible = menuTemplate[1].visible = menuTemplate[2].visible = false;
