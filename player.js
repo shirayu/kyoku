@@ -4,7 +4,7 @@ var util = require('util');
 
 var Player = function(targetApplication){
   var self = this;
-  self.targetApplication = 'iTunes';
+  self.targetApplication = undefined;
   events.EventEmitter.call(this);
 
   self.track = {};
@@ -30,6 +30,9 @@ var Player = function(targetApplication){
     + '})\'';
 
   var fetchData = function(){
+    if (self.targetApplication === undefined){
+        return;
+    }
     exec(cmds[self.targetApplication], function(e, stdout, stderr){
       var data = {};
       try { data = JSON.parse(stdout); } catch (e) {}
